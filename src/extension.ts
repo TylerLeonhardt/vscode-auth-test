@@ -12,8 +12,12 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 		}
 	});
 
-	const res = await client.api('/me/todo/lists').get() as { '@odata.nextLink': string | null | undefined; value: TodoTaskList[] };
-	res.value.map((v) => vscode.window.showInformationMessage(v.displayName || ""));
+	try {
+		const res = await client.api('/me/todo/lists').get() as { '@odata.nextLink': string | null | undefined; value: TodoTaskList[] };
+		res.value.map((v) => vscode.window.showInformationMessage(v.displayName || ""));
+	} catch(e) {
+		await vscode.window.showErrorMessage(e.body);
+	}
 }
 
 export function deactivate() {}
