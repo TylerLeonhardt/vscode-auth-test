@@ -5,6 +5,7 @@ import { TodoTaskList } from '@microsoft/microsoft-graph-types';
 
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
 
+	console.log('HERE WE GO!');
 	vscode.extensions.onDidChange(() => {
 		vscode.window.showInformationMessage('extensions changed!');
 	});
